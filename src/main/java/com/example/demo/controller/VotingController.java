@@ -73,9 +73,9 @@ public class VotingController {
         Candidate savedCandidate = votingService.createCandidate(candidate);
 
         URI location = ServletUriComponentsBuilder
-                .fromCurrentRequest()    // Start with "/api/v1/users"
-                .path("/{id}")           // Append "/{id}"
-                .buildAndExpand(savedCandidate.getId()) // Replace {id} with the real ID
+                .fromCurrentRequest()
+                .path("/{id}")
+                .buildAndExpand(savedCandidate.getId())
                 .toUri();
 
         return ResponseEntity.created(location).body(savedCandidate);
