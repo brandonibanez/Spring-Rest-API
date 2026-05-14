@@ -53,18 +53,21 @@ public class VotingController {
     }
 
     @GetMapping("")
-    public List<Candidate> candidates() {
-        return votingService.returnCandidates();
+    public ResponseEntity<List<Candidate>> candidates() {
+        List<Candidate> list = votingService.returnCandidates();
+        return ResponseEntity.ok(list);
     }
 
     @GetMapping("/{id}")
-    public Candidate candidate(@PathVariable String id) {
-        return votingService.fetchCandidate(id);
+    public ResponseEntity<Candidate> candidate(@PathVariable Long id) {
+        Candidate fetchedCandidate = votingService.fetchCandidate(id);
+        return ResponseEntity.ok(fetchedCandidate);
     }
 
     @GetMapping("/frontrunner")
-    public Candidate returnFrontrunner() {
-        return votingService.frontRunner();
+    public ResponseEntity<Candidate> returnFrontrunner() {
+        Candidate fetchedCandidate = votingService.frontRunner();
+        return ResponseEntity.ok(fetchedCandidate);
     }
 
     @PostMapping("")
