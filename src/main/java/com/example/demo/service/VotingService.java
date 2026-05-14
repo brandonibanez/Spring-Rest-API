@@ -15,7 +15,7 @@ public interface VotingService {
 
     Candidate frontRunner();
 
-    Candidate fetchCandidate(String id);
+    Candidate fetchCandidate(Long id);
 
     Candidate createCandidate(Candidate candidate);
 

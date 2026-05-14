@@ -17,12 +17,6 @@ public class VotingServiceImpl implements VotingService {
 
     private CandidateDAO candidateDAO;
 
-    List<Candidate> candidates = List.of(
-            new Candidate(1, "John", "first"),
-            new Candidate(2, "Jane", "second"),
-            new Candidate(3, "Bob", "third")
-    );
-
     public VotingServiceImpl(CandidateDAO candidateDAO) {
         this.candidateDAO = candidateDAO;
         System.out.println("VotingServiceImpl constructor called");
@@ -30,22 +24,19 @@ public class VotingServiceImpl implements VotingService {
 
     @Override
     public List<Candidate> returnCandidates() {
-//        candidateDAO.findAll();
-//        return candidates;
         return candidateDAO.findAll();
     }
 
     @Override
     public Candidate frontRunner() {
-//        return candidates.stream().filter(a -> Objects.equals(a.getRank(), "first")).toList().getFirst();
         List<Candidate> list = candidateDAO.findAll();
         return list.stream().filter(a -> Objects.equals(a.getRanks(), "first")).toList().getFirst();
     }
 
     @Override
-    public Candidate fetchCandidate(String id) {
+    public Candidate fetchCandidate(Long id) {
         return candidateDAO.findById(id)
-                .orElseThrow(() -> new ResourceNotFoundException("id", id));
+                .orElseThrow(() -> new ResourceNotFoundException("id", String.valueOf(id)));
     }
 
     @Override
